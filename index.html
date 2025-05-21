@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stand Inscription</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>Enregistrez votre Stand</h1>
+    <form action="process_registration.php" method="post" id="registrationForm">
+      <div class="form-group">
+        <label for="owner_name">Propriétaire</label>
+        <input type="text" id="owner_name" name="owner_name" placeholder="Entrez votre Nom" required>
+      </div>
+      <div class="form-group">
+        <label for="phone_number">Téléphone</label>
+        <input type="tel" id="phone_number" name="phone_number" placeholder="Entrez votre Téléphone" required>
+      </div>
+      <div class="form-group">
+        <label for="stand_code">Code Stand</label>
+        <input type="text" id="stand_code" name="stand_code" readonly>
+      </div>
+      <div class="form-group">
+        <label for="category">Catégories Articles</label>
+        <select id="category" name="category" required>
+          <option value="">-- Sélectionnez la catégorie --</option>
+          <option value="Alimentation Générale">Alimentation Générale</option>
+          <option value="Boissons">Boissons</option>
+          <option value="Gadgets & Électronique">Gadgets & Électronique</option>
+        </select>
+      </div>
+      <button type="submit">S'Enregistrer</button>
+    </form>
+  </div>
+
+  <script>
+    function generateStandCode(length = 12) {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let code = '';
+      for (let i = 0; i < length; i++) {
+        if (i > 0 && i % 4 === 0) {
+          code += '-';
+        }
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return code;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('stand_code').value = generateStandCode();
+    });
+  </script>
+</body>
+</html>
